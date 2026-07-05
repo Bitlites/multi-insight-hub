@@ -1,0 +1,33 @@
+baseURL: "https://yourcustomdomain.com" # Change to your actual domain later
+title: "Global Insights Hub"
+theme: "hugo-PaperMod"
+
+# Global visual enhancements for a stunning layout
+params:
+  defaultTheme: auto
+  showReadingTime: true
+  showShareButtons: true
+  showToc: true
+  TocOpen: true # Keeps table of contents visible on long articles
+  homeInfoParams:
+    Title: "Welcome to Global Insights Hub"
+    Content: "Deep-dives into Science, Tech, History, Economy, and Global Politics."
+
+# Beautiful visual grid setup for your niches
+menu:
+  main:
+    - name: "Science"
+      url: "/science/"
+      weight: 10
+    - name: "Technology"
+      url: "/technology/"
+      weight: 20
+    - name: "History & Geography"
+      url: "/history-geography/"
+      weight: 30
+    - name: "Economy & Markets"
+      url: "/economy-markets/"
+      weight: 40
+    - name: "Politics"
+      url: "/politics/"
+      weight: 50
