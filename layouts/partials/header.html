@@ -3,7 +3,7 @@
         <!-- 1. Custom Responsive Branding Module Layout Block -->
         <div class="logo">
             <a href="{{ "" | absURL }}" accesskey="h" title="Home (Alt + H)" class="logo-link">
-                <!-- Hugo relative url helper locks the physical file asset route cross-device -->
+                <!-- Hugo relative layout engine locks image path integrity across viewports -->
                 <img src="{{ "images/logo.png" | relURL }}" alt="Logo" class="logo-img">
                 <span class="logo-text">{{ .Site.Title }}</span>
             </a>
@@ -24,10 +24,10 @@
         <div class="logo-switches">
             <!-- Native PaperMod Light / Dark Toggle Integration Layout Hook -->
             <button id="theme-toggle" accesskey="t" title="(Alt + T)">
-                <svg id="moon" xmlns="http://w3.org" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg id="moon" xmlns="http://w3.org" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                 </svg>
-                <svg id="sun" xmlns="http://w3.org" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg id="sun" xmlns="http://w3.org" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="12" cy="12" r="5"></circle>
                     <line x1="12" y1="1" x2="12" y2="3"></line>
                     <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -55,7 +55,7 @@
        PRODUCTION NAV SYSTEM ARCHITECTURE (THEME VARIABLES INTEGRATED)
        ========================================================================== */
     :root {
-        --header-fixed-height: 70px;
+        --header-fixed-height: 75px;
     }
 
     body {
@@ -76,7 +76,7 @@
         border-bottom: 1px solid var(--border) !important;
         display: flex;
         align-items: center;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     }
 
     .nav {
@@ -117,7 +117,7 @@
     .logo-switches {
         display: flex !important;
         align-items: center !important;
-        gap: 16px !important;
+        gap: 18px !important;
     }
 
     /* Adaptive Visual Switcher Logic Binding Options Selector Blocks */
@@ -163,25 +163,44 @@
         }
 
         .burger-btn {
-            display: none !important; /* Hide mobile panel tools on spacious viewports */
+            display: none !important;
         }
     }
 
     /* ==========================================================================
-       ADAPTIVE TABLET & MOBILE VIEWPORT DROPDOWN DRAWER GRID FRAME
+       ADAPTIVE TABLET BREAKPOINT (PRESERVES BRAND TEXT STRING REGISTRY)
        ========================================================================== */
-    @media (max-width: 1150px) {
-        /* Absolute Truncation Rule: Hide site textual name string entirely on responsive viewports */
+    @media (min-width: 768px) and (max-width: 1150px) {
         .logo-text {
+            display: block !important; /* Enforces title to stay visible on iPad/Tablets */
+        }
+
+        #menu {
+            display: none !important; /* Collapses text categories into the drawer panel early */
+        }
+
+        .burger-btn {
+            display: flex !important; /* Exposes the responsive toggle trigger */
+        }
+    }
+
+    /* ==========================================================================
+       MOBILE ONLY VIEWPORT CONSTRAINT ENGINE
+       ========================================================================== */
+    @media (max-width: 767px) {
+        .logo-text {
+            display: none !important; /* Conceals title text string entirely on mobile */
+        }
+        
+        #menu {
             display: none !important;
         }
+    }
 
-        /* Guarantee the branding image element remains strictly visible on smaller screens */
-        .logo-img {
-            display: block !important;
-        }
-
-        /* Transform categories menu links panel into a premium dropdown slide drawer overlay */
+    /* ==========================================================================
+       DROPDOWN DRAWER PANEL GRAPHICS & CALIBRATED SLIM CLOSE BUTTON ICON
+       ========================================================================== */
+    @media (max-width: 1150px) {
         #menu {
             position: fixed !important;
             top: var(--header-fixed-height) !important;
@@ -194,11 +213,10 @@
             margin: 0 !important;
             list-style: none !important;
             gap: 8px !important;
-            display: none !important; /* Collapsed state container default target variables */
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15) !important;
+            display: none !important;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.12) !important;
         }
 
-        /* Active visibility utility rules state toggled via script click events */
         #menu.mobile-menu-active {
             display: flex !important;
         }
@@ -222,13 +240,13 @@
             background: var(--entry) !important;
         }
 
-        /* Micro-Animated Interactive Hamburger Trigger Icon Component */
+        /* Highly-Optimized Slim Hamburg Component Framework Trigger */
         .burger-btn {
             display: flex !important;
             flex-direction: column !important;
             justify-content: space-between !important;
-            width: 24px !important;
-            height: 18px !important;
+            width: 22px !important;
+            height: 14px !important;
             background: none !important;
             border: none !important;
             padding: 0 !important;
@@ -238,16 +256,16 @@
 
         .burger-line {
             width: 100% !important;
-            height: 2px !important;
+            height: 1.5px !important; /* Thinner, elegant 1.5px structural lines */
             background-color: currentColor !important;
-            border-radius: 2px !important;
-            transition: transform 0.25s, opacity 0.25s !important;
+            border-radius: 1px !important;
+            transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease !important;
         }
 
-        /* Smooth transformation vector pathways to map bars into a clean close cross icon */
-        .burger-transform-active .burger-line:nth-child(1) { transform: translateY(8px) rotate(45deg) !important; }
+        /* Fine-tuned vector shifts to intersect perfectly into an absolute 'X' cross close icon */
+        .burger-transform-active .burger-line:nth-child(1) { transform: translateY(6px) rotate(45deg) !important; }
         .burger-transform-active .burger-line:nth-child(2) { opacity: 0 !important; }
-        .burger-transform-active .burger-line:nth-child(3) { transform: translateY(-8px) rotate(-45deg) !important; }
+        .burger-transform-active .burger-line:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg) !important; }
     }
 </style>
 
@@ -279,7 +297,7 @@
                 burgerBtn.setAttribute("aria-expanded", isOpen);
             });
 
-            // Cleanly collapse drawer menu overlay panels if user clicks away from navigation bounds
+            // Smoothly collapse navigation drawer overlay if user clicks outside container path bounds
             document.addEventListener("click", (e) => {
                 if (!linksMenu.contains(e.target) && !burgerBtn.contains(e.target)) {
                     linksMenu.classList.remove("mobile-menu-active");
@@ -288,5 +306,5 @@
                 }
             });
         }
-    }); // Block closes cleanly with zero trailing syntax duplicates
+    });
 </script>
