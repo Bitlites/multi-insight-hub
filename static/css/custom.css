@@ -1,0 +1,16 @@
+/* Sticky Navigation Fix */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgba(29, 30, 32, 0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Push main wrapper down so text doesn't hide behind the frozen header */
+.main {
+    margin-top: 90px !important;
+}

@@ -1,0 +1,4 @@
+
+.wrangler/
+public/
+.hugo_build.lock
