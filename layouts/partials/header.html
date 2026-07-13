@@ -1,15 +1,16 @@
 <header class="header">
     <nav class="nav">
-        <!-- Responsive Branding Engine Layout Block -->
-        <div class="logo-wrapper">
-            <a href="{{ "" | absURL }}" accesskey="h" title="Home (Alt + H)" class="brand-link">
-                <img src="{{ "images/logo.png" | absURL }}" alt="Logo" class="global-logo" onerror="this.style.display='none'">
-                <span class="global-title">{{ .Site.Title }}</span>
+        <!-- 1. Custom Responsive Branding Module Layout Block -->
+        <div class="logo">
+            <a href="{{ "" | absURL }}" accesskey="h" title="Home (Alt + H)" class="logo-link">
+                <!-- Hugo relative url helper locks the physical file asset route cross-device -->
+                <img src="{{ "images/logo.png" | relURL }}" alt="Logo" class="logo-img">
+                <span class="logo-text">{{ .Site.Title }}</span>
             </a>
         </div>
 
-        <!-- Integrated Navigation Link Panel Layout Container -->
-        <ul id="menu" class="nav-links">
+        <!-- 2. Integrated Navigation Link Panel Layout Container -->
+        <ul id="menu">
             {{- range .Site.Menus.main }}
             <li>
                 <a href="{{ .URL | absURL }}" title="{{ .Name }}">
@@ -19,9 +20,9 @@
             {{- end }}
         </ul>
 
-        <!-- Right-side Action Control Area Container -->
-        <div class="header-actions">
-            <!-- Native PaperMod Light / Dark Toggle Integration -->
+        <!-- 3. Right-side Quick Action Component Array Container -->
+        <div class="logo-switches">
+            <!-- Native PaperMod Light / Dark Toggle Integration Layout Hook -->
             <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                 <svg id="moon" xmlns="http://w3.org" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
@@ -39,11 +40,11 @@
                 </svg>
             </button>
 
-            <!-- Responsive Hamburger Mobile Trigger Component -->
-            <button id="hamburger-trigger" class="hamburger-btn" aria-label="Toggle Menu" aria-expanded="false">
-                <span class="hamburger-bar"></span>
-                <span class="hamburger-bar"></span>
-                <span class="hamburger-bar"></span>
+            <!-- Responsive Hamburger Mobile Trigger Button Component -->
+            <button id="hamburger-menu-toggle" class="burger-btn" aria-label="Toggle Menu" aria-expanded="false">
+                <span class="burger-line"></span>
+                <span class="burger-line"></span>
+                <span class="burger-line"></span>
             </button>
         </div>
     </nav>
@@ -51,31 +52,31 @@
 
 <style>
     /* ==========================================================================
-       PRODUCTION REFRESH OVERRIDES: DIRECT INJECTED NAV ARCTITECTURE ENGINE
+       PRODUCTION NAV SYSTEM ARCHITECTURE (THEME VARIABLES INTEGRATED)
        ========================================================================== */
     :root {
-        --nav-bar-height: 70px;
+        --header-fixed-height: 70px;
     }
 
     body {
-        padding-top: var(--nav-bar-height) !important;
+        padding-top: var(--header-fixed-height) !important;
     }
 
     .main {
         margin-top: 40px !important;
     }
 
-    /* Fixed Sticky Container Grid Frame Setup using PaperMod Theme Variables */
+    /* Fixed Sticky Container Main Grid Frame Setup */
     .header {
         position: fixed !important;
         top: 0; left: 0; right: 0;
         z-index: 9999 !important;
-        height: var(--nav-bar-height) !important;
+        height: var(--header-fixed-height) !important;
         background: var(--theme) !important;
         border-bottom: 1px solid var(--border) !important;
         display: flex;
         align-items: center;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        box-shadow: 0 2px 10px rgba(0,0,0,0.06);
     }
 
     .nav {
@@ -88,34 +89,38 @@
         padding: 0 24px !important;
     }
 
-    /* Brand Component Alignment Blocks */
-    .logo-wrapper .brand-link {
+    /* Branding Core Component Framework Alignment Layouts */
+    .logo-link {
         display: flex !important;
         align-items: center !important;
         gap: 12px !important;
         text-decoration: none !important;
     }
 
-    .global-logo {
+    .logo-img {
         width: 32px !important;
         height: 32px !important;
+        max-height: 32px !important;
         object-fit: cover !important;
         border-radius: 6px !important;
+        border: 1px solid var(--border) !important;
+        display: block !important;
     }
 
-    .global-title {
-        font-size: 1.35rem !important;
+    .logo-text {
+        font-size: 1.4rem !important;
         font-weight: 700 !important;
         letter-spacing: -0.5px !important;
         color: var(--primary) !important;
     }
 
-    .header-actions {
+    .logo-switches {
         display: flex !important;
         align-items: center !important;
         gap: 16px !important;
     }
 
+    /* Adaptive Visual Switcher Logic Binding Options Selector Blocks */
     #theme-toggle {
         background: none !important;
         border: none !important;
@@ -125,50 +130,63 @@
         line-height: 1 !important;
     }
 
-    #theme-toggle #sun { display: none; }
-    .light #theme-toggle #sun { display: block; }
-    .light #theme-toggle #moon { display: none; }
+    body.dark #theme-toggle #sun { display: block !important; }
+    body.dark #theme-toggle #moon { display: none !important; }
+    body:not(.dark) #theme-toggle #sun { display: none !important; }
+    body:not(.dark) #theme-toggle #moon { display: block !important; }
 
-    /* Desktop Viewport Alignment Layout Frame Constraints */
-    @media (min-width: 992px) {
-        .nav-links {
+    /* ==========================================================================
+       LAPTOP & DESKTOP RESOLUTIONS NAV VIEWPORT FRAME CONFIGURATION 
+       ========================================================================== */
+    @media (min-width: 1151px) {
+        #menu {
             display: flex !important;
             align-items: center !important;
-            gap: 4px !important;
+            gap: 6px !important;
             margin: 0 !important;
             padding: 0 !important;
             list-style: none !important;
         }
 
-        .nav-links a {
+        #menu a {
             font-size: 0.95rem !important;
             font-weight: 600 !important;
             padding: 8px 14px !important;
             border-radius: 6px !important;
             color: var(--primary) !important;
             text-decoration: none !important;
-            transition: background 0.2s !important;
+            transition: all 0.2s ease !important;
         }
 
-        .nav-links a:hover {
+        #menu a:hover {
             background: var(--entry) !important;
         }
 
-        .hamburger-btn {
-            display: none !important;
+        .burger-btn {
+            display: none !important; /* Hide mobile panel tools on spacious viewports */
         }
     }
 
-    /* Mobile & Tablet Adaptive Responsive Drawer Breakdown Engine Layout Rules */
-    @media (max-width: 991px) {
-        .global-title {
-            display: none !important; /* Hide title string on mobile viewports */
+    /* ==========================================================================
+       ADAPTIVE TABLET & MOBILE VIEWPORT DROPDOWN DRAWER GRID FRAME
+       ========================================================================== */
+    @media (max-width: 1150px) {
+        /* Absolute Truncation Rule: Hide site textual name string entirely on responsive viewports */
+        .logo-text {
+            display: none !important;
         }
 
-        .nav-links {
+        /* Guarantee the branding image element remains strictly visible on smaller screens */
+        .logo-img {
+            display: block !important;
+        }
+
+        /* Transform categories menu links panel into a premium dropdown slide drawer overlay */
+        #menu {
             position: fixed !important;
-            top: var(--nav-bar-height) !important;
-            left: 0 !important; right: 0 !important;
+            top: var(--header-fixed-height) !important;
+            left: 0 !important;
+            right: 0 !important;
             background: var(--theme) !important;
             border-bottom: 1px solid var(--border) !important;
             flex-direction: column !important;
@@ -176,19 +194,20 @@
             margin: 0 !important;
             list-style: none !important;
             gap: 8px !important;
-            display: none !important;
+            display: none !important; /* Collapsed state container default target variables */
             box-shadow: 0 15px 30px rgba(0,0,0,0.15) !important;
         }
 
-        .nav-links.drawer-open {
+        /* Active visibility utility rules state toggled via script click events */
+        #menu.mobile-menu-active {
             display: flex !important;
         }
 
-        .nav-links li {
+        #menu li {
             width: 100% !important;
         }
 
-        .nav-links a {
+        #menu a {
             display: block !important;
             width: 100% !important;
             padding: 12px 16px !important;
@@ -199,12 +218,12 @@
             color: var(--primary) !important;
         }
 
-        .nav-links a:hover {
+        #menu a:hover {
             background: var(--entry) !important;
         }
 
-        /* Pure CSS Interactive Hamburger Icon Components */
-        .hamburger-btn {
+        /* Micro-Animated Interactive Hamburger Trigger Icon Component */
+        .burger-btn {
             display: flex !important;
             flex-direction: column !important;
             justify-content: space-between !important;
@@ -217,7 +236,7 @@
             color: var(--primary) !important;
         }
 
-        .hamburger-bar {
+        .burger-line {
             width: 100% !important;
             height: 2px !important;
             background-color: currentColor !important;
@@ -225,15 +244,16 @@
             transition: transform 0.25s, opacity 0.25s !important;
         }
 
-        .burger-active .hamburger-bar:nth-child(1) { transform: translateY(8px) rotate(45deg) !important; }
-        .burger-active .hamburger-bar:nth-child(2) { opacity: 0 !important; }
-        .burger-active .hamburger-bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg) !important; }
+        /* Smooth transformation vector pathways to map bars into a clean close cross icon */
+        .burger-transform-active .burger-line:nth-child(1) { transform: translateY(8px) rotate(45deg) !important; }
+        .burger-transform-active .burger-line:nth-child(2) { opacity: 0 !important; }
+        .burger-transform-active .burger-line:nth-child(3) { transform: translateY(-8px) rotate(-45deg) !important; }
     }
 </style>
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-        // Tie structural theme switcher back into PaperMod's core variables engine
+        // 1. Synchronize Dark/Light Mode Actions and Variable States Natively
         const toggleBtn = document.getElementById("theme-toggle");
         if (toggleBtn) {
             toggleBtn.addEventListener("click", () => {
@@ -247,25 +267,26 @@
             });
         }
 
-        // Hamburger Navigation Event Handling Trigger Controls
-        const trigger = document.getElementById("hamburger-trigger");
-        const navMenu = document.getElementById("menu");
+        // 2. Hamburger Dropdown Navigation Interface State Logic Controller
+        const burgerBtn = document.getElementById("hamburger-menu-toggle");
+        const linksMenu = document.getElementById("menu");
 
-        if (trigger && navMenu) {
-            trigger.addEventListener("click", (e) => {
+        if (burgerBtn && linksMenu) {
+            burgerBtn.addEventListener("click", (e) => {
                 e.stopPropagation();
-                const opened = navMenu.classList.toggle("drawer-open");
-                trigger.classList.toggle("burger-active");
-                trigger.setAttribute("aria-expanded", opened);
+                const isOpen = linksMenu.classList.toggle("mobile-menu-active");
+                burgerBtn.classList.toggle("burger-transform-active");
+                burgerBtn.setAttribute("aria-expanded", isOpen);
             });
 
+            // Cleanly collapse drawer menu overlay panels if user clicks away from navigation bounds
             document.addEventListener("click", (e) => {
-                if (!navMenu.contains(e.target) && !trigger.contains(e.target)) {
-                    navMenu.classList.remove("drawer-open");
-                    trigger.classList.remove("burger-active");
-                    trigger.setAttribute("aria-expanded", "false");
+                if (!linksMenu.contains(e.target) && !burgerBtn.contains(e.target)) {
+                    linksMenu.classList.remove("mobile-menu-active");
+                    burgerBtn.classList.remove("burger-transform-active");
+                    burgerBtn.setAttribute("aria-expanded", "false");
                 }
             });
         }
-    });
+    }); // Block closes cleanly with zero trailing syntax duplicates
 </script>
