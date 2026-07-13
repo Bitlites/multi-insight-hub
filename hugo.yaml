@@ -1,9 +1,8 @@
-baseURL: "https://multi-insight-hub.bitlitesolutions.workers.dev/"
+baseURL: "https://workers.dev"
 languageCode: "en-us"
 title: "Multi-Insight Hub"
 theme: "hugo-PaperMod"
 
-# Modern Hugo Pagination Syntax
 pagination:
   pagerSize: 12
 
@@ -48,7 +47,7 @@ params:
   description: "Premium insights, breakthrough trends, and expert analyses across technology, deep science, history, and global financial markets."
   author: "Editorial Team"
   
-  # PaperMod Configuration
+  # PaperMod Structural Layout Variables
   defaultTheme: "dark"
   disableThemeToggle: true
   ShowShareButtons: true
@@ -57,13 +56,11 @@ params:
   ShowBreadCrumbs: true
   ShowCodeCopyButtons: true
 
+  # Premium Landing Registry Setup
   homeInfoParams:
     Title: "Multi-Insight Hub"
-    Content: "Welcome to the intersection of deep analytical thought and modern global journalism. Explore our structured niches below."
+    Content: "Welcome to the intersection of deep analytical thought and modern global journalism. Explore our structured niches through the categories above."
 
+  # Monetization Config Layer
   adsense:
-    client: "ca-pub-XXXXXXXXXXXXXXXX"
-
-assets:
-  css:
-    - "css/custom.css"
+    client: "ca-pub-XXXXXXXXXXXXXXXX" # Replace with your real code later

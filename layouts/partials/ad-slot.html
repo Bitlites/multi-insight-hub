@@ -1,15 +1,12 @@
 {{ if .Site.Params.adsense.client }}
-<div class="ad-container" style="margin: 20px auto; text-align: center; background: #2e2e33; padding: 15px; border-radius: 4px; border: 1px dashed #444;">
-    <span style="display: block; font-size: 10px; color: #666; margin-bottom: 5px; text-transform: uppercase;">Advertisement</span>
-    <!-- Google AdSense Code -->
+<div class="ad-container" style="margin: 25px auto; text-align: center; background: rgba(255,255,255,0.03); padding: 15px; border-radius: 6px; border: 1px dashed rgba(255,255,255,0.15);">
+    <span style="display: block; font-size: 10px; color: #666; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;">Sponsored Advertisement</span>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="{{ .Site.Params.adsense.client }}"
          data-ad-slot="auto"
          data-ad-format="auto"
          data-full-width-responsive="true"></ins>
-    <script>
-         (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
 {{ end }}
