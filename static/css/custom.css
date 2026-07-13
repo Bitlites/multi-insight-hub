@@ -1,16 +1,195 @@
-/* Sticky Navigation Fix */
+/* ==========================================================================
+   GLOBAL COMPONENT OVERRIDES: STICKY COMPACT HEADER
+   ========================================================================== */
+:root {
+    --header-height: 70px;
+}
+
+body {
+    padding-top: var(--header-height);
+}
+
+/* Master Fixed Header Container */
 .header {
-    position: fixed;
+    position: fixed !important;
     top: 0;
     left: 0;
     right: 0;
+    height: var(--header-height);
     z-index: 1000;
-    background: rgba(29, 30, 32, 0.95);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(29, 30, 32, 0.85) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    align-items: center;
+    transition: background 0.3s, border-color 0.3s;
 }
 
-/* Push main wrapper down so text doesn't hide behind the frozen header */
-.main {
-    margin-top: 90px !important;
+/* Sync header background with PaperMod's native light mode */
+.light .header {
+    background: rgba(245, 245, 247, 0.85) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* Navigation Layout Controls */
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    height: 100%;
+}
+
+/* Branding Core Layout */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-icon {
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.light .logo-icon {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.logo-text {
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+/* Menu Navigation Links Frame */
+#menu {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#menu a {
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+#menu a:hover, #menu a.active {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--accent) !important;
+}
+
+.light #menu a:hover, .light #menu a.active {
+    background: rgba(0, 0, 0, 0.04);
+}
+
+/* Right-side Action Control Area */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Native Theme Toggle Alignment */
+#theme-toggle {
+    padding: 0;
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    cursor: pointer;
+    line-height: 1;
+    color: var(--text);
+    transition: transform 0.2s;
+}
+
+#theme-toggle:hover {
+    transform: scale(1.1);
+}
+
+/* Mobile Hamburger Trigger Base Styling (Hidden on Desktop/Tablet) */
+.menu-trigger {
+    display: none;
+    background: none;
+    border: none;
+    padding: 6px;
+    cursor: pointer;
+}
+
+.menu-trigger svg {
+    width: 24px;
+    height: 24px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+}
+
+/* ==========================================================================
+   RESPONSIVE MEDIA QUERIES (MOBILE BREAKPOINT ENGINE)
+   ========================================================================== */
+@media (max-width: 900px) {
+    body {
+        padding-top: calc(var(--header-height) - 10px);
+    }
+    
+    .header {
+        height: calc(var(--header-height) - 10px);
+    }
+
+    /* Hide the textual site name on mobile screens */
+    .logo-text {
+        display: none;
+    }
+
+    /* Expose the mobile hamburger toggle option */
+    .menu-trigger {
+        display: block;
+        color: var(--text);
+    }
+
+    /* Transform main navigation link panel into an overlay drawer */
+    #menu {
+        position: fixed;
+        top: calc(var(--header-height) - 10px);
+        right: -100%;
+        width: 280px;
+        height: calc(100vh - (var(--header-height) - 10px));
+        background: var(--theme);
+        border-left: 1px solid rgba(255, 255, 255, 0.08);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 30px 20px;
+        gap: 15px;
+        transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: -10px 0 30px rgba(0,0,0,0.2);
+    }
+
+    .light #menu {
+        border-left: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    /* Active state when drawer is triggered open */
+    #menu.open {
+        right: 0;
+    }
+
+    #menu a {
+        width: 100%;
+        display: block;
+        font-size: 1.1rem;
+        padding: 10px 14px;
+    }
 }

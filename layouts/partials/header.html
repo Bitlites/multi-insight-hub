@@ -1,0 +1,105 @@
+<header class="header">
+    <nav class="nav">
+        <!-- Responsive Branding Engine Layout Block -->
+        <div class="logo">
+            <a href="{{ "" | absURL }}" accesskey="h" title="{{ .Site.Title }} (Alt + H)">
+                <img src="{{ "images/logo.png" | absURL }}" alt="Logo" class="logo-icon">
+            </a>
+            <span class="logo-text">
+                <a href="{{ "" | absURL }}" accesskey="h">{{ .Site.Title }}</a>
+            </span>
+        </div>
+
+        <!-- Integrated Navigation and Actions Block Layout Frame -->
+        <div class="header-actions">
+            <ul id="menu">
+                {{- $currentPage := . -}}
+                {{- range .Site.Menus.main }}
+                {{- $menu_item_url := .URL | relLangURL }}
+                {{- $page_url:= $currentPage.RelPermalink | relLangURL }}
+                <li>
+                    <a href="{{ .URL | absURL }}" title="{{ .Name }}" class="{{ if eq $menu_item_url $page_url }}active{{ end }}">
+                        <span>{{ .Name }}</span>
+                    </a>
+                </li>
+                {{- end }}
+            </ul>
+
+            <!-- Theme Toggle Option Core Architecture Injection Component -->
+            <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                <svg id="moon" xmlns="http://w3.org" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+                <svg id="sun" xmlns="http://w3.org" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+            </button>
+
+            <!-- Responsive Hamburger Mobile Trigger -->
+            <button class="menu-trigger" id="menu-trigger-btn" aria-label="Toggle Menu">
+                <svg viewBox="0 0 24 24">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+    </nav>
+</header>
+
+<!-- JavaScript Interactivity Controller Block -->
+<script>
+    // System Theme Toggle Management Layer Rules Engine
+    const storageKey = "theme-preference";
+    const toggleBtn = document.getElementById("theme-toggle");
+    const sunIcon = document.getElementById("sun");
+    const moonIcon = document.getElementById("moon");
+
+    function setTheme(isDark) {
+        if (isDark) {
+            document.body.classList.remove('light');
+            sunIcon.style.display = "none";
+            moonIcon.style.display = "block";
+            localStorage.setItem(storageKey, "dark");
+        } else {
+            document.body.classList.add('light');
+            moonIcon.style.display = "none";
+            sunIcon.style.display = "block";
+            localStorage.setItem(storageKey, "light");
+        }
+    }
+
+    // Initialize preference from storage or default to dark
+    const savedTheme = localStorage.getItem(storageKey);
+    const systemPrefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+    let isDarkState = savedTheme ? (savedTheme === "dark") : !systemPrefersLight;
+    setTheme(isDarkState);
+
+    toggleBtn.addEventListener("click", () => {
+        isDarkState = !isDarkState;
+        setTheme(isDarkState);
+    });
+
+    // Mobile Navigation Drawer Overlay Trigger Logic Controller
+    const menuTrigger = document.getElementById("menu-trigger-btn");
+    const menuMenu = document.getElementById("menu");
+
+    menuTrigger.addEventListener("click", (e) => {
+        e.stopPropagation();
+        menuMenu.classList.toggle("open");
+    });
+
+    document.addEventListener("click", (e) => {
+        if (!menuMenu.contains(e.target) && !menuTrigger.contains(e.target)) {
+            menuMenu.classList.remove("open");
+        }
+    });
+</script>

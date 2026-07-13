@@ -47,20 +47,22 @@ params:
   description: "Premium insights, breakthrough trends, and expert analyses across technology, deep science, history, and global financial markets."
   author: "Editorial Team"
   
-  # PaperMod Structural Layout Variables
+  # Structural Custom Overrides Activation Key
   defaultTheme: "dark"
-  disableThemeToggle: true
+  disableThemeToggle: true # We disabled the native switch because we built a premium customized tracker inside the header layout template
   ShowShareButtons: true
   ShowReadingTime: true
   ShowPostNavLinks: true
   ShowBreadCrumbs: true
   ShowCodeCopyButtons: true
 
-  # Premium Landing Registry Setup
   homeInfoParams:
     Title: "Multi-Insight Hub"
     Content: "Welcome to the intersection of deep analytical thought and modern global journalism. Explore our structured niches through the categories above."
 
-  # Monetization Config Layer
   adsense:
-    client: "ca-pub-XXXXXXXXXXXXXXXX" # Replace with your real code later
+    client: "ca-pub-XXXXXXXXXXXXXXXX"
+
+assets:
+  css:
+    - "css/custom.css"
