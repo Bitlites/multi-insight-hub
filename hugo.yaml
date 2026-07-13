@@ -47,14 +47,21 @@ params:
   description: "Premium insights, breakthrough trends, and expert analyses across technology, deep science, history, and global financial markets."
   author: "Editorial Team"
   
-  # Structural Custom Overrides Activation Key
+  # Native Light and Dark Mode Activation Mapping Controls
   defaultTheme: "dark"
-  disableThemeToggle: true # We disabled the native switch because we built a premium customized tracker inside the header layout template
+  disableThemeToggle: false # Exposes the native toggle engine safely
+
   ShowShareButtons: true
   ShowReadingTime: true
   ShowPostNavLinks: true
   ShowBreadCrumbs: true
   ShowCodeCopyButtons: true
+
+  # PaperMod Built-in Brand and Logo Handler Configuration Block
+  label:
+    text: "Multi-Insight Hub"
+    icon: "images/logo.png" # Automatically matches your placeholder asset file path
+    iconHeight: 28
 
   homeInfoParams:
     Title: "Multi-Insight Hub"
@@ -63,6 +70,7 @@ params:
   adsense:
     client: "ca-pub-XXXXXXXXXXXXXXXX"
 
+# Load the responsive styling rules block cleanly
 assets:
   css:
     - "css/custom.css"
