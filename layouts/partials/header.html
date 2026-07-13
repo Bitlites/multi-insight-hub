@@ -1,12 +1,15 @@
 <header class="header">
     <nav class="nav">
-        <div class="logo">
-            <a href="{{ "" | absURL }}" accesskey="h" title="Home (Alt + H)">
-                <img src="{{ "images/logo.png" | absURL }}" alt="Logo" class="logo-img">
-                <span class="logo-text">{{ .Site.Title }}</span>
+        <!-- Responsive Branding Engine Layout Block -->
+        <div class="logo-wrapper">
+            <a href="{{ "" | absURL }}" accesskey="h" title="Home (Alt + H)" class="brand-link">
+                <img src="{{ "images/logo.png" | absURL }}" alt="Logo" class="global-logo" onerror="this.style.display='none'">
+                <span class="global-title">{{ .Site.Title }}</span>
             </a>
         </div>
-        <ul id="menu">
+
+        <!-- Integrated Navigation Link Panel Layout Container -->
+        <ul id="menu" class="nav-links">
             {{- range .Site.Menus.main }}
             <li>
                 <a href="{{ .URL | absURL }}" title="{{ .Name }}">
@@ -15,40 +18,254 @@
             </li>
             {{- end }}
         </ul>
-        <div class="logo-switches">
+
+        <!-- Right-side Action Control Area Container -->
+        <div class="header-actions">
+            <!-- Native PaperMod Light / Dark Toggle Integration -->
             <button id="theme-toggle" accesskey="t" title="(Alt + T)">
-                <svg id="moon" xmlns="http://w3.org" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-                <svg id="sun" xmlns="http://w3.org" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                <svg id="moon" xmlns="http://w3.org" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+                <svg id="sun" xmlns="http://w3.org" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
             </button>
-            <button id="hamburger-menu-toggle" class="burger-btn" aria-label="Toggle Menu">
-                <span class="burger-line"></span>
-                <span class="burger-line"></span>
-                <span class="burger-line"></span>
+
+            <!-- Responsive Hamburger Mobile Trigger Component -->
+            <button id="hamburger-trigger" class="hamburger-btn" aria-label="Toggle Menu" aria-expanded="false">
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
             </button>
         </div>
     </nav>
 </header>
 
+<style>
+    /* ==========================================================================
+       PRODUCTION REFRESH OVERRIDES: DIRECT INJECTED NAV ARCTITECTURE ENGINE
+       ========================================================================== */
+    :root {
+        --nav-bar-height: 70px;
+    }
+
+    body {
+        padding-top: var(--nav-bar-height) !important;
+    }
+
+    .main {
+        margin-top: 40px !important;
+    }
+
+    /* Fixed Sticky Container Grid Frame Setup using PaperMod Theme Variables */
+    .header {
+        position: fixed !important;
+        top: 0; left: 0; right: 0;
+        z-index: 9999 !important;
+        height: var(--nav-bar-height) !important;
+        background: var(--theme) !important;
+        border-bottom: 1px solid var(--border) !important;
+        display: flex;
+        align-items: center;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .nav {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        width: 100% !important;
+        max-width: 1240px !important;
+        margin: 0 auto !important;
+        padding: 0 24px !important;
+    }
+
+    /* Brand Component Alignment Blocks */
+    .logo-wrapper .brand-link {
+        display: flex !important;
+        align-items: center !important;
+        gap: 12px !important;
+        text-decoration: none !important;
+    }
+
+    .global-logo {
+        width: 32px !important;
+        height: 32px !important;
+        object-fit: cover !important;
+        border-radius: 6px !important;
+    }
+
+    .global-title {
+        font-size: 1.35rem !important;
+        font-weight: 700 !important;
+        letter-spacing: -0.5px !important;
+        color: var(--primary) !important;
+    }
+
+    .header-actions {
+        display: flex !important;
+        align-items: center !important;
+        gap: 16px !important;
+    }
+
+    #theme-toggle {
+        background: none !important;
+        border: none !important;
+        padding: 0 !important;
+        cursor: pointer !important;
+        color: var(--primary) !important;
+        line-height: 1 !important;
+    }
+
+    #theme-toggle #sun { display: none; }
+    .light #theme-toggle #sun { display: block; }
+    .light #theme-toggle #moon { display: none; }
+
+    /* Desktop Viewport Alignment Layout Frame Constraints */
+    @media (min-width: 992px) {
+        .nav-links {
+            display: flex !important;
+            align-items: center !important;
+            gap: 4px !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            list-style: none !important;
+        }
+
+        .nav-links a {
+            font-size: 0.95rem !important;
+            font-weight: 600 !important;
+            padding: 8px 14px !important;
+            border-radius: 6px !important;
+            color: var(--primary) !important;
+            text-decoration: none !important;
+            transition: background 0.2s !important;
+        }
+
+        .nav-links a:hover {
+            background: var(--entry) !important;
+        }
+
+        .hamburger-btn {
+            display: none !important;
+        }
+    }
+
+    /* Mobile & Tablet Adaptive Responsive Drawer Breakdown Engine Layout Rules */
+    @media (max-width: 991px) {
+        .global-title {
+            display: none !important; /* Hide title string on mobile viewports */
+        }
+
+        .nav-links {
+            position: fixed !important;
+            top: var(--nav-bar-height) !important;
+            left: 0 !important; right: 0 !important;
+            background: var(--theme) !important;
+            border-bottom: 1px solid var(--border) !important;
+            flex-direction: column !important;
+            padding: 24px !important;
+            margin: 0 !important;
+            list-style: none !important;
+            gap: 8px !important;
+            display: none !important;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15) !important;
+        }
+
+        .nav-links.drawer-open {
+            display: flex !important;
+        }
+
+        .nav-links li {
+            width: 100% !important;
+        }
+
+        .nav-links a {
+            display: block !important;
+            width: 100% !important;
+            padding: 12px 16px !important;
+            font-size: 1.05rem !important;
+            font-weight: 600 !important;
+            border-radius: 6px !important;
+            text-decoration: none !important;
+            color: var(--primary) !important;
+        }
+
+        .nav-links a:hover {
+            background: var(--entry) !important;
+        }
+
+        /* Pure CSS Interactive Hamburger Icon Components */
+        .hamburger-btn {
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: space-between !important;
+            width: 24px !important;
+            height: 18px !important;
+            background: none !important;
+            border: none !important;
+            padding: 0 !important;
+            cursor: pointer !important;
+            color: var(--primary) !important;
+        }
+
+        .hamburger-bar {
+            width: 100% !important;
+            height: 2px !important;
+            background-color: currentColor !important;
+            border-radius: 2px !important;
+            transition: transform 0.25s, opacity 0.25s !important;
+        }
+
+        .burger-active .hamburger-bar:nth-child(1) { transform: translateY(8px) rotate(45deg) !important; }
+        .burger-active .hamburger-bar:nth-child(2) { opacity: 0 !important; }
+        .burger-active .hamburger-bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg) !important; }
+    }
+</style>
+
 <script>
-    // Pull the theme toggle functionality straight from PaperMod's core engine
-    document.getElementById("theme-toggle").addEventListener("click", () => {
-        if (document.body.className.includes("dark")) {
-            document.body.classList.remove('dark');
-            localStorage.setItem("pref-theme", 'light');
-        } else {
-            document.body.classList.add('dark');
-            localStorage.setItem("pref-theme", 'dark');
+    document.addEventListener("DOMContentLoaded", () => {
+        // Tie structural theme switcher back into PaperMod's core variables engine
+        const toggleBtn = document.getElementById("theme-toggle");
+        if (toggleBtn) {
+            toggleBtn.addEventListener("click", () => {
+                if (document.body.classList.contains("dark")) {
+                    document.body.classList.remove("dark");
+                    localStorage.setItem("pref-theme", "light");
+                } else {
+                    document.body.classList.add("dark");
+                    localStorage.setItem("pref-theme", "dark");
+                }
+            });
+        }
+
+        // Hamburger Navigation Event Handling Trigger Controls
+        const trigger = document.getElementById("hamburger-trigger");
+        const navMenu = document.getElementById("menu");
+
+        if (trigger && navMenu) {
+            trigger.addEventListener("click", (e) => {
+                e.stopPropagation();
+                const opened = navMenu.classList.toggle("drawer-open");
+                trigger.classList.toggle("burger-active");
+                trigger.setAttribute("aria-expanded", opened);
+            });
+
+            document.addEventListener("click", (e) => {
+                if (!navMenu.contains(e.target) && !trigger.contains(e.target)) {
+                    navMenu.classList.remove("drawer-open");
+                    trigger.classList.remove("burger-active");
+                    trigger.setAttribute("aria-expanded", "false");
+                }
+            });
         }
     });
-
-    // Mobile hamburger menu trigger
-    const burgerBtn = document.getElementById("hamburger-menu-toggle");
-    const linksMenu = document.getElementById("menu");
-    if (burgerBtn && linksMenu) {
-        burgerBtn.addEventListener("click", (e) => {
-            e.stopPropagation();
-            linksMenu.classList.toggle("mobile-menu-active");
-            burgerBtn.classList.toggle("burger-transform-active");
-        });
-    }
 </script>
