@@ -1,4 +1,4 @@
-baseURL: "https://workers.dev"
+baseURL: "https://multi-insight-hub.bitlitesolutions.workers.dev/"
 languageCode: "en-us"
 title: "Multi-Insight Hub"
 theme: "hugo-PaperMod"
@@ -34,7 +34,7 @@ menu:
       url: "/social-studies/"
       weight: 60
     - name: "About Us"
-      url: "/aboout-us/"
+      url: "/about-us/"
       weight: 70
     - name: "Contact Us"
       url: "/contact-us/"
