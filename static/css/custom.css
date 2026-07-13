@@ -1,101 +1,124 @@
 /* ==========================================================================
-   PRODUCTION-GRADE RESPONSIVE STICKY NAV SYSTEM
+   THEME-INTEGRATED STICKY RESPONSIVE HEADER
    ========================================================================== */
 
 :root {
-    --nav-height: 60px;
+    --header-height: 70px;
 }
 
-/* 1. Pin Header and Apply High-Performance Blur Filters */
+body {
+    padding-top: var(--header-height) !important;
+}
+
+.main {
+    margin-top: 30px !important;
+}
+
+/* Fixed main bar styled using theme native design variables */
 .header {
     position: fixed !important;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-    height: var(--nav-height);
-    background: rgba(30, 30, 32, 0.85) !important;
-    backdrop-filter: blur(12px) !important;
-    -webkit-backdrop-filter: blur(12px) !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    top: 0; left: 0; right: 0;
+    z-index: 2000;
+    height: var(--header-height) !important;
+    background: var(--theme) !important; /* Hooks into PaperMod Dark/Light dynamically */
+    border-bottom: 1px solid var(--border) !important;
     display: flex;
     align-items: center;
-    transition: background 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
-/* Light Mode Sync Match */
-.light .header {
-    background: rgba(245, 245, 247, 0.85) !important;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-}
-
-/* Offset Main Content Area to Prevent Text Overlap Under Nav Bar */
-.main {
-    margin-top: calc(var(--nav-height) + 40px) !important;
-}
-
-/* 2. Brand Positioning Realignment Rules */
 .nav {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    max-width: 1240px !important;
+    margin: 0 auto !important;
+    padding: 0 24px !important;
+}
+
+.logo-link {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+    gap: 12px;
 }
 
-.logo {
+.logo-img {
+    width: 32px; height: 32px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.logo-text {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.logo-switches {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 16px;
 }
 
-/* Enforce Consistent Proportions for Logo Icon Graphic */
-.logo img {
-    max-height: 28px !important;
-    width: auto !important;
-    border-radius: 4px;
-    display: inline-block;
-    vertical-align: middle;
+/* Hide native sun/moon icon styling layout conflicts */
+#theme-toggle svg {
+    color: var(--primary);
 }
 
-/* 3. Responsive Breakpoint Engine (Tablet & Desktop vs Mobile) */
-@media (min-width: 768px) {
+/* Desktop Menu Layout Constraints */
+@media (min-width: 992px) {
     #menu {
         display: flex !important;
-        gap: 15px;
+        align-items: center;
+        gap: 8px;
+        list-style: none;
+        margin: 0; padding: 0;
     }
+    #menu a {
+        font-size: 0.95rem;
+        font-weight: 600;
+        padding: 8px 14px;
+        border-radius: 6px;
+        color: var(--primary);
+    }
+    #menu a:hover {
+        background: var(--entry);
+    }
+    .burger-btn { display: none !important; }
 }
 
-@media (max-width: 767px) {
-    /* Hide Text Branding Title Element on Mobile Viewports */
-    .logo a span {
-        display: none !important;
-    }
+/* Mobile & Tablet Configuration Drawer Layout rules */
+@media (max-width: 991px) {
+    .logo-text { display: none !important; } /* Only logo graphic visible on mobile */
     
-    /* Ensure the Logo Graphic Stays Explicitly Visible On Mobile */
-    .logo a img {
-        display: block !important;
-    }
-
-    /* Convert Desktop Links Container into a Mobile Dropdown Layout Drawer */
     #menu {
-        position: absolute;
-        top: var(--nav-height);
-        left: 0;
-        right: 0;
-        background: var(--theme);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        padding: 10px 20px;
-        box-shadow: 0 10px 15px rgba(0,0,0,0.2);
+        position: fixed !important;
+        top: var(--header-height) !important;
+        left: 0; right: 0;
+        background: var(--theme) !important;
+        border-bottom: 1px solid var(--border) !important;
+        flex-direction: column !important;
+        padding: 20px !important;
+        margin: 0; list-style: none;
+        display: none;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.15);
     }
 
-    .light #menu {
-        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-    }
+    #menu.mobile-menu-active { display: flex !important; }
+    #menu li { width: 100%; }
+    #menu a { display: block; width: 100%; padding: 12px; font-weight: 600; }
 
-    #menu li {
-        margin: 8px 0;
+    /* Interactive Hamburger Bar Graphics */
+    .burger-btn {
+        display: flex; flex-direction: column; justify-content: space-between;
+        width: 24px; height: 18px; background: none; border: none; padding: 0; cursor: pointer;
+        color: var(--primary);
     }
+    .burger-line { width: 100%; height: 2px; background-color: currentColor; transition: 0.2s; }
+
+    /* Morphing burger rotation shapes */
+    .burger-transform-active .burger-line:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .burger-transform-active .burger-line:nth-child(2) { opacity: 0; }
+    .burger-transform-active .burger-transform-active .burger-line:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 }
