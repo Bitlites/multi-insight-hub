@@ -1,6 +1,6 @@
 <header class="header">
     <nav class="nav">
-        <!-- 1. Custom Responsive Branding Module Layout Block -->
+        <!-- 1. Branding Module (Stays solid across light & dark themes) -->
         <div class="logo">
             <a href="{{ "" | absURL }}" accesskey="h" title="Home (Alt + H)" class="logo-link">
                 <!-- Hugo relative layout engine locks image path integrity across viewports -->
@@ -9,7 +9,7 @@
             </a>
         </div>
 
-        <!-- 2. Integrated Navigation Link Panel Layout Container -->
+        <!-- 2. Navigation Menus Link Container -->
         <ul id="menu">
             {{- range .Site.Menus.main }}
             <li>
@@ -20,7 +20,7 @@
             {{- end }}
         </ul>
 
-        <!-- 3. Right-side Quick Action Component Array Container -->
+        <!-- 3. Action Utility Switches Block -->
         <div class="logo-switches">
             <!-- Native PaperMod Light / Dark Toggle Integration Layout Hook -->
             <button id="theme-toggle" accesskey="t" title="(Alt + T)">
@@ -40,7 +40,7 @@
                 </svg>
             </button>
 
-            <!-- Responsive Hamburger Mobile Trigger Button Component -->
+            <!-- Responsive Hamburger Mobile Trigger Component Button -->
             <button id="hamburger-menu-toggle" class="burger-btn" aria-label="Toggle Menu" aria-expanded="false">
                 <svg class="icon-burger" xmlns="http://w3.org" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -69,6 +69,7 @@
         margin-top: 40px !important;
     }
 
+    /* Fixed Nav Bar - Using PaperMod's native var(--bg) so it changes color automatically */
     .header {
         position: fixed !important;
         top: 0;
@@ -77,20 +78,18 @@
         z-index: 9999 !important;
         height: var(--header-fixed-height) !important;
         background: var(--theme) !important;
+        /* Base layout wrapper fallbacks */
         border-bottom: 1px solid var(--border) !important;
         display: flex;
         align-items: center;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-        transition: background 0.3s ease; /* Smooth background animation transition cross-fades */
+        transition: background 0.2s ease, border-color 0.2s ease;
     }
 
-    /* ADD THIS CRITICAL VISUAL ENGINE STATE SWITCH */
-    /* When the root tags flip light, force the header background container to follow standard light variables */
-    html:not(.dark) .header,
+    /* NATIVE LIGHT THEME SWITCH OVERRIDE: Switches bar to clean white natively on toggle */
     body:not(.dark) .header {
-        background: rgba(245, 245, 247, 0.9) !important;
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
+        background: rgba(255, 255, 255, 0.97) !important;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
     }
 
     .nav {
@@ -142,18 +141,16 @@
         line-height: 1 !important;
     }
 
-    /* 1. Target theme-toggle icons natively via root state variables */
+    /* Fix: Symmetrical Icon Visibility Switcher Engine rules */
     #theme-toggle svg {
-        display: none;
+        display: none !important;
     }
 
-    /* Switch on Sun icon when root HTML node or body tracks dark mode */
-    .dark #theme-toggle #sun {
+    body.dark #theme-toggle #sun {
         display: block !important;
     }
 
-    /* Switch on Moon icon when root HTML node or body runs light mode */
-    :not(.dark) #theme-toggle #moon {
+    body:not(.dark) #theme-toggle #moon {
         display: block !important;
     }
 
@@ -227,6 +224,11 @@
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12) !important;
         }
 
+        body:not(.dark) #menu {
+            background: #ffffff !important;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+        }
+
         #menu.mobile-menu-active {
             display: flex !important;
         }
@@ -280,24 +282,21 @@
 </style>
 
 <script>
-    // 1. Official PaperMod Native Theme Switching Logic Engine (Unwrapped & Realigned)
+    // Native PaperMod Theme State Swapper Event Engine
     document.getElementById("theme-toggle").addEventListener("click", () => {
-        if (document.body.className.includes("dark")) {
-            // Switch globally to Light Mode
+        if (document.body.classList.contains("dark")) {
             document.body.classList.remove('dark');
             localStorage.setItem("pref-theme", 'light');
         } else {
-            // Switch globally to Dark Mode
             document.body.classList.add('dark');
             localStorage.setItem("pref-theme", 'dark');
         }
     });
 
-    // 2. Mobile Responsive Hamburger Menu Trigger Drawer Logic Controller
+    // Mobile Navigation Toggle
     document.addEventListener("DOMContentLoaded", () => {
         const burgerBtn = document.getElementById("hamburger-menu-toggle");
         const linksMenu = document.getElementById("menu");
-        
         if (burgerBtn && linksMenu) {
             burgerBtn.addEventListener("click", (e) => {
                 e.stopPropagation();
@@ -305,7 +304,6 @@
                 burgerBtn.classList.toggle("burger-transform-active");
                 burgerBtn.setAttribute("aria-expanded", isOpen);
             });
-            
             document.addEventListener("click", (e) => {
                 if (!linksMenu.contains(e.target) && !burgerBtn.contains(e.target)) {
                     linksMenu.classList.remove("mobile-menu-active");
