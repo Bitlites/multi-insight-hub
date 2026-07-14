@@ -269,26 +269,20 @@
 </style>
 
 <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        // 1. Synchronize Dark/Light Mode Actions and Variable States Natively across BOTH document targets
-        const toggleBtn = document.getElementById("theme-toggle");
-        if (toggleBtn) {
-            toggleBtn.addEventListener("click", () => {
-                // Check PaperMod's root document context for dark mode presence
-                if (document.body.classList.contains("dark") || document.documentElement.classList.contains("dark")) {
-                    // Turn Light Mode On
-                    document.documentElement.classList.remove("dark");
-                    document.body.classList.remove("dark");
-                    localStorage.setItem("pref-theme", "light");
-                } else {
-                    // Turn Dark Mode On
-                    document.documentElement.classList.add("dark");
-                    document.body.classList.add("dark");
-                    localStorage.setItem("pref-theme", "dark");
-                }
-            });
+    // FIX: Pull theme-toggle out of DOMContentLoaded so it binds immediately
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.classList.contains("dark")) {
+            document.body.classList.remove('dark');
+            document.documentElement.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            document.documentElement.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
         }
+    });
 
+    document.addEventListener("DOMContentLoaded", () => {
         // 2. Hamburger Dropdown Navigation Interface State Logic Controller
         const burgerBtn = document.getElementById("hamburger-menu-toggle");
         const linksMenu = document.getElementById("menu");
@@ -301,7 +295,6 @@
                 burgerBtn.setAttribute("aria-expanded", isOpen);
             });
 
-            // Smoothly collapse navigation drawer overlay if user clicks outside container path bounds
             document.addEventListener("click", (e) => {
                 if (!linksMenu.contains(e.target) && !burgerBtn.contains(e.target)) {
                     linksMenu.classList.remove("mobile-menu-active");
