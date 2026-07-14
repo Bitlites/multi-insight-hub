@@ -283,32 +283,31 @@
     ENTERPRISE-GRADE UNIVERSAL CANVAS THEME SYNC ENGINE
     ========================================================================== */
     
-    /* When the layout handles light mode natively, color text dark charcoal */
+    /* Let PaperMod handle the body background colors natively, only tweak font base colors */
     body:not(.dark) {
-        background-color: #ffffff !important;
-        background: #ffffff !important;
-        color: #2e2e33 !important;
+        color: var(--primary) !important;
     }
 
     /* Recalibrate the fixed bar container to match theme state variables natively */
-    body:not(.dark) .header {
-        background: rgba(255, 255, 255, 0.98) !important;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    .header {
+        position: fixed !important; top: 0; left: 0; right: 0; z-index: 9999 !important;
+        height: var(--header-fixed-height) !important; 
+        background: var(--theme) !important; /* Hooks straight to PaperMod's dark/light variables */
+        border-bottom: 1px solid var(--border) !important; display: flex; align-items: center;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        transition: background 0.3s ease, border-color 0.3s ease;
     }
 
-    /* Target explicit navigation text layers to turn rich charcoal for readable contrast */
-    body:not(.dark) .logo-text a,
-    body:not(.dark) #menu a,
-    body:not(.dark) #theme-toggle {
-        color: #2e2e33 !important;
-        font-weight: 600 !important;
+    /* Force the header link layers to inherit adaptive primary text tones natively */
+    .logo-text a,
+    #menu a,
+    #theme-toggle {
+        color: var(--primary) !important;
     }
 
-    /* Maintain an interactive highlight state during active pointer clicks */
+    /* Light Theme specific item layout adaptations */
     body:not(.dark) #menu a:hover {
-        background-color: rgba(0, 0, 0, 0.05) !important;
-        color: var(--accent) !important;
+        background-color: var(--entry) !important;
     }
 </style>
 
