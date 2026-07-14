@@ -1,15 +1,14 @@
 <header class="header">
     <nav class="nav">
-        <!-- 1. Branding Module (Stays solid across light & dark themes) -->
+        <!-- 1. Custom Responsive Branding Module Layout Block -->
         <div class="logo">
             <a href="{{ "" | absURL }}" accesskey="h" title="Home (Alt + H)" class="logo-link">
-                <!-- Hugo relative layout engine locks image path integrity across viewports -->
-                <img src="{{ "images/logo.png" | relURL }}" alt="Logo" class="logo-img">
+                <img src="{{ " images/logo.png" | relURL }}" alt="Logo" class="logo-img">
                 <span class="logo-text">{{ .Site.Title }}</span>
             </a>
         </div>
 
-        <!-- 2. Navigation Menus Link Container -->
+        <!-- 2. Integrated Navigation Link Panel Layout Container -->
         <ul id="menu">
             {{- range .Site.Menus.main }}
             <li>
@@ -20,7 +19,7 @@
             {{- end }}
         </ul>
 
-        <!-- 3. Action Utility Switches Block -->
+        <!-- 3. Right-side Quick Action Component Array Container -->
         <div class="logo-switches">
             <!-- Native PaperMod Light / Dark Toggle Integration Layout Hook -->
             <button id="theme-toggle" accesskey="t" title="(Alt + T)">
@@ -40,7 +39,7 @@
                 </svg>
             </button>
 
-            <!-- Responsive Hamburger Mobile Trigger Component Button -->
+            <!-- Responsive Hamburger Mobile Trigger Button Component (SVG Swapping Structure) -->
             <button id="hamburger-menu-toggle" class="burger-btn" aria-label="Toggle Menu" aria-expanded="false">
                 <svg class="icon-burger" xmlns="http://w3.org" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -88,8 +87,8 @@
 
     /* NATIVE LIGHT THEME SWITCH OVERRIDE: Switches bar to clean white natively on toggle */
     body:not(.dark) .header {
-        background: rgba(255, 255, 255, 0.97) !important;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+        background: var(--entry) !important;
+        border-bottom: 1px solid var(--border) !important;
     }
 
     .nav {
@@ -141,7 +140,7 @@
         line-height: 1 !important;
     }
 
-    /* Fix: Symmetrical Icon Visibility Switcher Engine rules */
+    /* Symmetrical Icon Visibility Switcher Engine rules */
     #theme-toggle svg {
         display: none !important;
     }
@@ -225,8 +224,8 @@
         }
 
         body:not(.dark) #menu {
-            background: #ffffff !important;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+            background: var(--entry) !important;
+            border-bottom: 1px solid var(--border) !important;
         }
 
         #menu.mobile-menu-active {
@@ -282,7 +281,7 @@
 </style>
 
 <script>
-    // Native PaperMod Theme State Swapper Event Engine
+    // Native PaperMod Theme State Engine Hook
     document.getElementById("theme-toggle").addEventListener("click", () => {
         if (document.body.classList.contains("dark")) {
             document.body.classList.remove('dark');
@@ -293,7 +292,7 @@
         }
     });
 
-    // Mobile Navigation Toggle
+    // Mobile Responsive Hamburger Menu Trigger Logic Drawer Controller
     document.addEventListener("DOMContentLoaded", () => {
         const burgerBtn = document.getElementById("hamburger-menu-toggle");
         const linksMenu = document.getElementById("menu");

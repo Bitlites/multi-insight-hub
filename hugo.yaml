@@ -58,7 +58,7 @@ params:
   ShowBreadCrumbs: true
   ShowCodeCopyButtons: true
 
-  # PaperMod Built-in Brand and Logo Handler Configuration Block
+  # PaperMod Natively Verified Icon/Logo Registry Block
   label:
     text: "Multi-Insight Hub"
     icon: "images/logo.png" # Automatically matches your placeholder asset file path
@@ -70,8 +70,3 @@ params:
 
   adsense:
     client: "ca-pub-XXXXXXXXXXXXXXXX"
-
-# Crucial Correction: Load style rules from the asset cache pipelines to fix the toggle freeze
-assets:
-  css:
-    - "css/custom.css"
