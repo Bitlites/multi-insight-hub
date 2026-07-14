@@ -68,7 +68,7 @@
         margin-top: 40px !important;
     }
 
-    /* Fixed Nav Bar - Using PaperMod's native var(--bg) so it changes color automatically */
+    /* Using PaperMod's native adaptive variable variables directly so colors flip automatically */
     .header {
         position: fixed !important;
         top: 0;
@@ -83,12 +83,6 @@
         align-items: center;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         transition: background 0.2s ease, border-color 0.2s ease;
-    }
-
-    /* NATIVE LIGHT THEME SWITCH OVERRIDE: Switches bar to clean white natively on toggle */
-    body:not(.dark) .header {
-        background: var(--entry) !important;
-        border-bottom: 1px solid var(--border) !important;
     }
 
     .nav {
@@ -140,7 +134,7 @@
         line-height: 1 !important;
     }
 
-    /* Symmetrical Icon Visibility Switcher Engine rules */
+    /* Native Symmetrical Icon Toggles Visibility Engine */
     #theme-toggle svg {
         display: none !important;
     }
@@ -223,11 +217,6 @@
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12) !important;
         }
 
-        body:not(.dark) #menu {
-            background: var(--entry) !important;
-            border-bottom: 1px solid var(--border) !important;
-        }
-
         #menu.mobile-menu-active {
             display: flex !important;
         }
@@ -278,60 +267,24 @@
             display: block !important;
         }
     }
-
-    /* ==========================================================================
-    ENTERPRISE-GRADE UNIVERSAL CANVAS THEME SYNC ENGINE
-    ========================================================================== */
-    
-    /* Let PaperMod handle the body background colors natively, only tweak font base colors */
-    body:not(.dark) {
-        color: var(--primary) !important;
-    }
-
-    /* Recalibrate the fixed bar container to match theme state variables natively */
-    .header {
-        position: fixed !important; top: 0; left: 0; right: 0; z-index: 9999 !important;
-        height: var(--header-fixed-height) !important; 
-        background: var(--theme) !important; /* Hooks straight to PaperMod's dark/light variables */
-        border-bottom: 1px solid var(--border) !important; display: flex; align-items: center;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        transition: background 0.3s ease, border-color 0.3s ease;
-    }
-
-    /* Force the header link layers to inherit adaptive primary text tones natively */
-    .logo-text a,
-    #menu a,
-    #theme-toggle {
-        color: var(--primary) !important;
-    }
-
-    /* Light Theme specific item layout adaptations */
-    body:not(.dark) #menu a:hover {
-        background-color: var(--entry) !important;
-    }
 </style>
 
 <script>
-    // 1. Dual-Node Framework Synchronized Theme Switcher Engine
+    // Official Native PaperMod Toggle Switch Event Listener Mechanics
     document.getElementById("theme-toggle").addEventListener("click", () => {
-        if (document.documentElement.classList.contains("dark") || document.body.classList.contains("dark")) {
-            // Turn Light Mode On globally across all variables
-            document.documentElement.classList.remove('dark');
+        if (document.body.className.includes("dark")) {
             document.body.classList.remove('dark');
             localStorage.setItem("pref-theme", 'light');
         } else {
-            // Turn Dark Mode On globally across all variables
-            document.documentElement.classList.add('dark');
             document.body.classList.add('dark');
             localStorage.setItem("pref-theme", 'dark');
         }
     });
 
-    // 2. Mobile Responsive Hamburger Menu Trigger Drawer Logic Controller
+    // Mobile Navigation Controller Toggle Actions
     document.addEventListener("DOMContentLoaded", () => {
         const burgerBtn = document.getElementById("hamburger-menu-toggle");
         const linksMenu = document.getElementById("menu");
-        
         if (burgerBtn && linksMenu) {
             burgerBtn.addEventListener("click", (e) => {
                 e.stopPropagation();
@@ -339,7 +292,6 @@
                 burgerBtn.classList.toggle("burger-transform-active");
                 burgerBtn.setAttribute("aria-expanded", isOpen);
             });
-            
             document.addEventListener("click", (e) => {
                 if (!linksMenu.contains(e.target) && !burgerBtn.contains(e.target)) {
                     linksMenu.classList.remove("mobile-menu-active");
