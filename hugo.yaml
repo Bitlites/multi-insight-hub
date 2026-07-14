@@ -48,7 +48,7 @@ params:
   author: "Editorial Team"
   
   # Core Native Theme Configurations
-  defaultTheme: "dark"
+  defaultTheme: auto # Options: auto, light, dark
   disableThemeToggle: false # Exposes PaperMod's built-in toggler variables
   disableThemeChange: false
 
@@ -57,6 +57,8 @@ params:
   ShowPostNavLinks: true
   ShowBreadCrumbs: true
   ShowCodeCopyButtons: true
+
+  ThemeToggle: true
 
   # PaperMod Natively Verified Icon/Logo Registry Block
   label:
