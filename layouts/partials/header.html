@@ -136,11 +136,16 @@
         line-height: 1 !important;
     }
 
-    body.dark #theme-toggle #sun { display: block !important; }
-    body.dark #theme-toggle #moon { display: none !important; }
-    body:not(.dark) #theme-toggle #sun { display: none !important; }
-    body:not(.dark) #theme-toggle #moon { display: block !important; }
-
+    #theme-toggle svg {
+        display: none;
+    }
+    .dark #theme-toggle #sun {
+        display: block !important;
+    }
+    :not(.dark) #theme-toggle #moon {
+        display: block !important;
+    }
+    
     /* ==========================================================================
        LAPTOP & DESKTOP RESOLUTIONS NAV VIEWPORT FRAME CONFIGURATION 
        ========================================================================== */
