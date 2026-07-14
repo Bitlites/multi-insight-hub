@@ -1,4 +1,4 @@
-baseURL: "https://multi-insight-hub.bitlitesolutions.workers.dev"
+baseURL: "https://workers.dev"
 languageCode: "en-us"
 title: "Multi-Insight Hub"
 theme: "hugo-PaperMod"
@@ -47,9 +47,10 @@ params:
   description: "Premium insights, breakthrough trends, and expert analyses across technology, deep science, history, and global financial markets."
   author: "Editorial Team"
   
-  # Native Light and Dark Mode Activation Mapping Controls
+  # Core Native Theme Configurations
   defaultTheme: "dark"
-  disableThemeToggle: false # Exposes the native toggle engine safely
+  disableThemeToggle: false # Exposes PaperMod's built-in toggler variables
+  disableThemeChange: false
 
   ShowShareButtons: true
   ShowReadingTime: true
@@ -70,7 +71,7 @@ params:
   adsense:
     client: "ca-pub-XXXXXXXXXXXXXXXX"
 
-# Load the responsive styling rules block cleanly
+# Crucial Correction: Load style rules from the asset cache pipelines to fix the toggle freeze
 assets:
   css:
     - "css/custom.css"
