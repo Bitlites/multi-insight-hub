@@ -68,7 +68,7 @@
         margin-top: 40px !important;
     }
 
-    /* Fixed Header utilizing PaperMod's native var(--theme) color parameters */
+    /* Fixed Nav Bar - Bound straight to native var(--theme) so background switches automatically */
     .header {
         position: fixed !important;
         top: 0;
@@ -134,17 +134,15 @@
         line-height: 1 !important;
     }
 
-    /* Framework compliant icon visibility selectors */
+    /* Framework Symmetrical Icon Visibility Logic mapping natively to body classes */
     #theme-toggle svg {
         display: none !important;
     }
 
-    .dark #theme-toggle #sun,
     body.dark #theme-toggle #sun {
         display: block !important;
     }
 
-    html:not(.dark) #theme-toggle #moon,
     body:not(.dark) #theme-toggle #moon {
         display: block !important;
     }
@@ -272,20 +270,20 @@
 </style>
 
 <script>
-    // Dual-Node framework-synchronized theme switcher script engine
+    // Official Framework Toggling Routine - Simultaneously targets HTML root and Body layers
     document.getElementById("theme-toggle").addEventListener("click", () => {
-        if (document.documentElement.classList.contains("dark") || document.body.classList.contains("dark")) {
-            document.documentElement.classList.remove('dark');
+        if (document.body.classList.contains("dark")) {
             document.body.classList.remove('dark');
+            document.documentElement.classList.remove('dark');
             localStorage.setItem("pref-theme", 'light');
         } else {
-            document.documentElement.classList.add('dark');
             document.body.classList.add('dark');
+            document.documentElement.classList.add('dark');
             localStorage.setItem("pref-theme", 'dark');
         }
     });
 
-    // Mobile Navigation Controller Toggle Actions
+    // Mobile Hamburger Menu Handler 
     document.addEventListener("DOMContentLoaded", () => {
         const burgerBtn = document.getElementById("hamburger-menu-toggle");
         const linksMenu = document.getElementById("menu");
