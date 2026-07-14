@@ -68,7 +68,14 @@
         padding: 70px 24px 35px 24px;
         margin-top: 120px;
         font-family: system-ui, -apple-system, sans-serif;
-        transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    /* ADD THIS SEPARATOR TRANSITION TINT BLOCK FOR LIGHT THEMES */
+    html:not(.dark) .footer-container,
+    body:not(.dark) .footer-container {
+        background: #f5f5f7 !important; /* Premium light magazine background separation tint */
+        color: #666667;
     }
 
     .footer-grid {

@@ -81,6 +81,16 @@
         display: flex;
         align-items: center;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        transition: background 0.3s ease; /* Smooth background animation transition cross-fades */
+    }
+
+    /* ADD THIS CRITICAL VISUAL ENGINE STATE SWITCH */
+    /* When the root tags flip light, force the header background container to follow standard light variables */
+    html:not(.dark) .header,
+    body:not(.dark) .header {
+        background: rgba(245, 245, 247, 0.9) !important;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
     }
 
     .nav {
