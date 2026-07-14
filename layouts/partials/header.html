@@ -57,9 +57,6 @@
 </header>
 
 <style>
-    /* ==========================================================================
-       PRODUCTION NAV SYSTEM ARCHITECTURE (THEME VARIABLES INTEGRATED)
-       ========================================================================== */
     :root {
         --header-fixed-height: 75px;
     }
@@ -72,17 +69,18 @@
         margin-top: 40px !important;
     }
 
-    /* Fixed Sticky Container Main Grid Frame Setup */
     .header {
         position: fixed !important;
-        top: 0; left: 0; right: 0;
+        top: 0;
+        left: 0;
+        right: 0;
         z-index: 9999 !important;
         height: var(--header-fixed-height) !important;
         background: var(--theme) !important;
         border-bottom: 1px solid var(--border) !important;
         display: flex;
         align-items: center;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     }
 
     .nav {
@@ -95,7 +93,6 @@
         padding: 0 24px !important;
     }
 
-    /* Branding Core Component Framework Alignment Layouts */
     .logo-link {
         display: flex !important;
         align-items: center !important;
@@ -126,7 +123,6 @@
         gap: 18px !important;
     }
 
-    /* Adaptive Visual Switcher Logic Binding Options Selector Blocks */
     #theme-toggle {
         background: none !important;
         border: none !important;
@@ -136,26 +132,22 @@
         line-height: 1 !important;
     }
 
+    /* 1. CORRECTED: Framework-Compliant Icon Visibility Rules Engine */
     #theme-toggle #sun,
     #theme-toggle #moon {
         display: none !important;
     }
 
-    /* When the theme engine sets dark mode, show ONLY the sun icon */
     .dark #theme-toggle #sun,
     body.dark #theme-toggle #sun {
         display: block !important;
     }
 
-    /* When the theme engine sets light mode, show ONLY the moon icon */
     html:not(.dark) #theme-toggle #moon,
     body:not(.dark) #theme-toggle #moon {
         display: block !important;
     }
-    
-    /* ==========================================================================
-       LAPTOP & DESKTOP RESOLUTIONS NAV VIEWPORT FRAME CONFIGURATION 
-       ========================================================================== */
+
     @media (min-width: 1151px) {
         #menu {
             display: flex !important;
@@ -185,39 +177,30 @@
         }
     }
 
-    /* ==========================================================================
-       ADAPTIVE TABLET BREAKPOINT (PRESERVES BRAND TEXT STRING REGISTRY)
-       ========================================================================== */
     @media (min-width: 768px) and (max-width: 1150px) {
         .logo-text {
-            display: block !important; /* Enforces title to stay visible on iPad/Tablets */
+            display: block !important;
         }
 
         #menu {
-            display: none !important; /* Collapses text categories into the drawer panel early */
+            display: none !important;
         }
 
         .burger-btn {
-            display: flex !important; /* Exposes the responsive toggle trigger */
+            display: flex !important;
         }
     }
 
-    /* ==========================================================================
-       MOBILE ONLY VIEWPORT CONSTRAINT ENGINE
-       ========================================================================== */
     @media (max-width: 767px) {
         .logo-text {
-            display: none !important; /* Conceals title text string entirely on mobile */
+            display: none !important;
         }
-        
+
         #menu {
             display: none !important;
         }
     }
 
-    /* ==========================================================================
-       DROPDOWN DRAWER PANEL GRAPHICS & CALIBRATED SLIM CLOSE BUTTON ICON
-       ========================================================================== */
     @media (max-width: 1150px) {
         #menu {
             position: fixed !important;
@@ -232,7 +215,7 @@
             list-style: none !important;
             gap: 8px !important;
             display: none !important;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.12) !important;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12) !important;
         }
 
         #menu.mobile-menu-active {
@@ -258,7 +241,6 @@
             background: var(--entry) !important;
         }
 
-        /* Highly-Optimized Slim Hamburg Component Framework Trigger */
         .burger-btn {
             display: flex !important;
             align-items: center !important;
@@ -270,18 +252,26 @@
             color: var(--primary) !important;
         }
 
-        /* Default state layout displays */
-        .burger-btn .icon-close { display: none !important; }
-        .burger-btn .icon-burger { display: block !important; }
+        .burger-btn .icon-close {
+            display: none !important;
+        }
 
-        /* Active class visibility override shifts */
-        .burger-btn.burger-transform-active .icon-burger { display: none !important; }
-        .burger-btn.burger-transform-active .icon-close { display: block !important; }
+        .burger-btn .icon-burger {
+            display: block !important;
+        }
+
+        .burger-btn.burger-transform-active .icon-burger {
+            display: none !important;
+        }
+
+        .burger-btn.burger-transform-active .icon-close {
+            display: block !important;
+        }
     }
 </style>
 
 <script>
-    // 1. Unified PaperMod Native Switch Click Event Controller
+    // 2. CORRECTED: Direct Document State Switching Engine (No Initialization Wrapping)
     document.getElementById("theme-toggle").addEventListener("click", () => {
         if (document.body.classList.contains("dark") || document.documentElement.classList.contains("dark")) {
             document.body.classList.remove('dark');
@@ -294,11 +284,10 @@
         }
     });
 
-    // 2. Mobile Responsive Hamburger Menu Trigger Drawer Logic
     document.addEventListener("DOMContentLoaded", () => {
         const burgerBtn = document.getElementById("hamburger-menu-toggle");
         const linksMenu = document.getElementById("menu");
-        
+
         if (burgerBtn && linksMenu) {
             burgerBtn.addEventListener("click", (e) => {
                 e.stopPropagation();
@@ -306,7 +295,7 @@
                 burgerBtn.classList.toggle("burger-transform-active");
                 burgerBtn.setAttribute("aria-expanded", isOpen);
             });
-            
+
             document.addEventListener("click", (e) => {
                 if (!linksMenu.contains(e.target) && !burgerBtn.contains(e.target)) {
                     linksMenu.classList.remove("mobile-menu-active");
