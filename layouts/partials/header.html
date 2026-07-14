@@ -283,22 +283,19 @@
     ENTERPRISE-GRADE UNIVERSAL CANVAS THEME SYNC ENGINE
     ========================================================================== */
     
-    /* Force the main website body element and central canvas background to flip white natively */
-    body:not(.dark),
-    html:not(.dark) body {
-        background-color: #ffffff !important;
-        background: #ffffff !important;
+    /* When the layout tracks light mode, color text dark charcoal */
+    :not(.dark) body {
         color: #2e2e33 !important;
     }
 
-    /* Enforce the header background container bar to turn clean solid premium white in light mode */
+    /* Enforce the header background container bar to match theme states natively */
     body:not(.dark) .header {
         background: rgba(255, 255, 255, 0.98) !important;
         border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
     }
 
-    /* Target explicit navigation texts to turn rich, high-weight dark charcoal for readable contrast */
+    /* Target explicit navigation texts to turn rich charcoal for readable contrast */
     body:not(.dark) .logo-text a,
     body:not(.dark) #menu a,
     body:not(.dark) #theme-toggle {
@@ -314,21 +311,26 @@
 </style>
 
 <script>
-    // Native PaperMod Theme State Engine Hook
+    // 1. Dual-Node Framework Synchronized Theme Switcher
     document.getElementById("theme-toggle").addEventListener("click", () => {
-        if (document.body.classList.contains("dark")) {
+        if (document.documentElement.classList.contains("dark") || document.body.classList.contains("dark")) {
+            // Turn Light Mode On globally across all nodes
+            document.documentElement.classList.remove('dark');
             document.body.classList.remove('dark');
             localStorage.setItem("pref-theme", 'light');
         } else {
+            // Turn Dark Mode On globally across all nodes
+            document.documentElement.classList.add('dark');
             document.body.classList.add('dark');
             localStorage.setItem("pref-theme", 'dark');
         }
     });
 
-    // Mobile Responsive Hamburger Menu Trigger Logic Drawer Controller
+    // 2. Mobile Responsive Hamburger Menu Trigger Drawer Logic Controller
     document.addEventListener("DOMContentLoaded", () => {
         const burgerBtn = document.getElementById("hamburger-menu-toggle");
         const linksMenu = document.getElementById("menu");
+        
         if (burgerBtn && linksMenu) {
             burgerBtn.addEventListener("click", (e) => {
                 e.stopPropagation();
@@ -336,6 +338,7 @@
                 burgerBtn.classList.toggle("burger-transform-active");
                 burgerBtn.setAttribute("aria-expanded", isOpen);
             });
+            
             document.addEventListener("click", (e) => {
                 if (!linksMenu.contains(e.target) && !burgerBtn.contains(e.target)) {
                     linksMenu.classList.remove("mobile-menu-active");
