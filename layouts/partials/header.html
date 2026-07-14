@@ -144,18 +144,16 @@
 
     /* 1. Target theme-toggle icons natively via root state variables */
     #theme-toggle svg {
-        display: none !important;
+        display: none;
     }
 
     /* Switch on Sun icon when root HTML node or body tracks dark mode */
-    .dark #theme-toggle #sun,
-    body.dark #theme-toggle #sun {
+    .dark #theme-toggle #sun {
         display: block !important;
     }
 
     /* Switch on Moon icon when root HTML node or body runs light mode */
-    html:not(.dark) #theme-toggle #moon,
-    body:not(.dark) #theme-toggle #moon {
+    :not(.dark) #theme-toggle #moon {
         display: block !important;
     }
 
@@ -282,22 +280,20 @@
 </style>
 
 <script>
-    // 2. Synchronize theme states across BOTH core structural element nodes
+    // 1. Official PaperMod Native Theme Switching Logic Engine (Unwrapped & Realigned)
     document.getElementById("theme-toggle").addEventListener("click", () => {
-        if (document.documentElement.classList.contains("dark") || document.body.classList.contains("dark")) {
-            // Turn Light Mode On globally across all variables
-            document.documentElement.classList.remove('dark');
+        if (document.body.className.includes("dark")) {
+            // Switch globally to Light Mode
             document.body.classList.remove('dark');
             localStorage.setItem("pref-theme", 'light');
         } else {
-            // Turn Dark Mode On globally across all variables
-            document.documentElement.classList.add('dark');
+            // Switch globally to Dark Mode
             document.body.classList.add('dark');
             localStorage.setItem("pref-theme", 'dark');
         }
     });
 
-    // Mobile Responsive Hamburger Menu Trigger Logic Controller
+    // 2. Mobile Responsive Hamburger Menu Trigger Drawer Logic Controller
     document.addEventListener("DOMContentLoaded", () => {
         const burgerBtn = document.getElementById("hamburger-menu-toggle");
         const linksMenu = document.getElementById("menu");
