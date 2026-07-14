@@ -61,12 +61,14 @@
 <style>
     /* Isolated Footer Styling Engine */
     .footer-container {
-        background: var(--code-bg) !important; /* Targets standard internal background variables seamlessly */
+        /* Uses a slightly contrasting native shade that flips automatically across light & dark modes */
+        background: var(--code-bg) !important; 
         border-top: 1px solid var(--border);
         color: var(--secondary);
-        padding: 70px 24px 35px 24px;
-        margin-top: 120px;
+        padding: 80px 24px 40px 24px;
+        margin-top: 100px;
         font-family: system-ui, -apple-system, sans-serif;
+        transition: background 0.3s ease; /* Smooth transition blend during theme toggles */
     }
     .footer-grid { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 50px; }
     .footer-col h3 { color: var(--primary); font-size: 1.45rem; margin: 0 0 16px 0; font-weight: 700; letter-spacing: -0.5px; }

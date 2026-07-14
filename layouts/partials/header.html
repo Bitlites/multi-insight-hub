@@ -270,16 +270,20 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-        // 1. Synchronize Dark/Light Mode Actions and Variable States Natively
+        // 1. Synchronize Dark/Light Mode Actions and Variable States Natively across BOTH document targets
         const toggleBtn = document.getElementById("theme-toggle");
         if (toggleBtn) {
             toggleBtn.addEventListener("click", () => {
-                // Corrected: Checks the root HTML node where PaperMod stores the dark class
+                // Check root html node for current active mode
                 if (document.documentElement.classList.contains("dark")) {
+                    // Turn Light Mode On
                     document.documentElement.classList.remove("dark");
+                    document.body.classList.remove("dark");
                     localStorage.setItem("pref-theme", "light");
                 } else {
+                    // Turn Dark Mode On
                     document.documentElement.classList.add("dark");
+                    document.body.classList.add("dark");
                     localStorage.setItem("pref-theme", "dark");
                 }
             });
