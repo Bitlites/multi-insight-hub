@@ -60,7 +60,7 @@
 </footer>
 
 <style>
-    /* Native adaptive variable footer architecture - Zero hardcoded hex colors */
+    /* Fixed Footer layout - Binds straight to native framework tokens to update color automatically */
     .footer-container {
         background: var(--code-bg) !important;
         border-top: 1px solid var(--border);
@@ -69,6 +69,12 @@
         margin-top: 120px;
         font-family: system-ui, -apple-system, sans-serif;
         transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* Framework compliant light theme overrides */
+    body:not(.dark) .footer-container {
+        background: var(--entry) !important;
+        border-top: 1px solid var(--border) !important;
     }
 
     .footer-grid {

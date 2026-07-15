@@ -39,7 +39,7 @@
                 </svg>
             </button>
 
-            <!-- Responsive Hamburger Mobile Trigger Button Component -->
+            <!-- Responsive Hamburger Mobile Trigger Button Component (SVG Swapping Structure) -->
             <button id="hamburger-menu-toggle" class="burger-btn" aria-label="Toggle Menu" aria-expanded="false">
                 <svg class="icon-burger" xmlns="http://w3.org" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -68,7 +68,7 @@
         margin-top: 40px !important;
     }
 
-    /* Fixed Nav Bar - Bound straight to native var(--theme) so background switches automatically */
+    /* Using PaperMod's native var(--theme) directly so background colors flip automatically */
     .header {
         position: fixed !important;
         top: 0;
@@ -134,7 +134,7 @@
         line-height: 1 !important;
     }
 
-    /* FIX: Corrected Icon Visibility Engine Maps to PaperMod Class Guidelines Natively */
+    /* Native Symmetrical Icon Visibility Switcher Engine rules mapping to PaperMod standard body states */
     #theme-toggle svg {
         display: none !important;
     }
@@ -143,12 +143,9 @@
         display: block !important;
     }
 
-    /* Dark theme -> Show Sun to switch back */
     body:not(.dark) #theme-toggle #moon {
         display: block !important;
     }
-
-    /* Light theme -> Show Moon to switch back */
 
     @media (min-width: 1151px) {
         #menu {
@@ -273,20 +270,18 @@
 </style>
 
 <script>
-    // FIX: Combined Framework Native Multi-Node Engine Controller Updates Classes on html and body elements
+    // Unified framework-synchronized native toggle switch event controller
     document.getElementById("theme-toggle").addEventListener("click", () => {
-        if (document.body.classList.contains("dark") || document.documentElement.classList.contains("dark")) {
+        if (document.body.classList.contains("dark")) {
             document.body.classList.remove('dark');
-            document.documentElement.classList.remove('dark');
             localStorage.setItem("pref-theme", 'light');
         } else {
             document.body.classList.add('dark');
-            document.documentElement.classList.add('dark');
             localStorage.setItem("pref-theme", 'dark');
         }
     });
 
-    // Mobile Responsive Drawer Controller Actions
+    // Mobile Navigation Controls
     document.addEventListener("DOMContentLoaded", () => {
         const burgerBtn = document.getElementById("hamburger-menu-toggle");
         const linksMenu = document.getElementById("menu");
