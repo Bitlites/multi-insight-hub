@@ -60,7 +60,7 @@
 </footer>
 
 <style>
-    /* Fixed Footer - Relies purely on framework variables to switch colors automatically */
+    /* Native adaptive variable footer architecture - Zero hardcoded hex colors */
     .footer-container {
         background: var(--code-bg) !important;
         border-top: 1px solid var(--border);
@@ -68,26 +68,7 @@
         padding: 70px 24px 35px 24px;
         margin-top: 120px;
         font-family: system-ui, -apple-system, sans-serif;
-        transition: background 0.3s ease, color 0.3s ease;
-    }
-
-    /* REMAPPED EXPLICIT LIGHT ASSIGNMENTS: Switches background panel natively on toggle */
-    body:not(.dark) .footer-container {
-        background: #f5f5f7 !important;
-        border-top: 1px solid rgba(0, 0, 0, 0.06) !important;
-    }
-
-    body:not(.dark) .footer-col h3,
-    body:not(.dark) .footer-col h4 {
-        color: #1d1e20 !important;
-    }
-
-    body:not(.dark) .footer-col p,
-    body:not(.dark) .footer-col ul a,
-    body:not(.dark) .footer-socials a,
-    body:not(.dark) .footer-bottom,
-    body:not(.dark) .footer-bottom a {
-        color: #3e3f42 !important;
+        transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
     }
 
     .footer-grid {
@@ -180,10 +161,6 @@
         color: var(--primary);
         text-decoration: none;
         font-weight: 500;
-    }
-
-    .footer-bottom .powered-by {
-        opacity: 0.7;
     }
 
     @media (max-width: 991px) {

@@ -39,7 +39,7 @@
                 </svg>
             </button>
 
-            <!-- Responsive Hamburger Mobile Trigger Button Component (SVG Swapping Structure) -->
+            <!-- Responsive Hamburger Mobile Trigger Button Component -->
             <button id="hamburger-menu-toggle" class="burger-btn" aria-label="Toggle Menu" aria-expanded="false">
                 <svg class="icon-burger" xmlns="http://w3.org" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -82,13 +82,6 @@
         display: flex;
         align-items: center;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-        transition: background 0.3s ease, border-color 0.3s ease;
-    }
-
-    /* REMAPPED EXPLICIT LIGHT ASSIGNMENTS: Safely switches header container to white natively on toggle */
-    body:not(.dark) .header {
-        background: rgba(255, 255, 255, 0.98) !important;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
     }
 
     .nav {
@@ -121,7 +114,7 @@
     .logo-text {
         font-size: 1.4rem !important;
         font-weight: 700 !important;
-        letter-spacing: -0.5px !important;
+        letter-spacing: -.5px !important;
         color: var(--primary) !important;
     }
 
@@ -140,20 +133,23 @@
         line-height: 1 !important;
     }
 
-    /* Framework compliant clean icon visibility engines rules */
-    #theme-toggle svg {
+    body.dark #theme-toggle #sun {
+        display: block !important;
+    }
+
+    body.dark #theme-toggle #moon {
         display: none !important;
     }
 
-    body.dark #theme-toggle #sun {
-        display: block !important;
+    body:not(.dark) #theme-toggle #sun {
+        display: none !important;
     }
 
     body:not(.dark) #theme-toggle #moon {
         display: block !important;
     }
 
-    @media (min-width: 1151px) {
+    @media (min-width:1151px) {
         #menu {
             display: flex !important;
             align-items: center !important;
@@ -164,13 +160,13 @@
         }
 
         #menu a {
-            font-size: 0.95rem !important;
+            font-size: .95rem !important;
             font-weight: 600 !important;
             padding: 8px 14px !important;
             border-radius: 6px !important;
             color: var(--primary) !important;
             text-decoration: none !important;
-            transition: all 0.2s ease !important;
+            transition: all .2s ease !important;
         }
 
         #menu a:hover {
@@ -221,11 +217,6 @@
             gap: 8px !important;
             display: none !important;
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12) !important;
-        }
-
-        body:not(.dark) #menu {
-            background: #ffffff !important;
-            border-bottom: 1px solid var(--border) !important;
         }
 
         #menu.mobile-menu-active {
@@ -281,21 +272,25 @@
 </style>
 
 <script>
-    // Unified framework-synchronized native toggle switch event controller
-    document.getElementById("theme-toggle").addEventListener("click", () => {
-        if (document.body.classList.contains("dark")) {
-            document.body.classList.remove('dark');
-            localStorage.setItem("pref-theme", 'light');
-        } else {
-            document.body.classList.add('dark');
-            localStorage.setItem("pref-theme", 'dark');
-        }
-    });
-
-    // Mobile Hamburger Menu Handler 
     document.addEventListener("DOMContentLoaded", () => {
+        // 1. Synchronize Dark/Light Mode Actions and Variable States Natively
+        const toggleBtn = document.getElementById("theme-toggle");
+        if (toggleBtn) {
+            toggleBtn.addEventListener("click", () => {
+                if (document.body.classList.contains("dark")) {
+                    document.body.classList.remove("dark");
+                    localStorage.setItem("pref-theme", "light");
+                } else {
+                    document.body.classList.add("dark");
+                    localStorage.setItem("pref-theme", "dark");
+                }
+            });
+        }
+
+        // 2. Hamburger Dropdown Navigation Interface State Logic Controller
         const burgerBtn = document.getElementById("hamburger-menu-toggle");
         const linksMenu = document.getElementById("menu");
+
         if (burgerBtn && linksMenu) {
             burgerBtn.addEventListener("click", (e) => {
                 e.stopPropagation();
@@ -303,6 +298,8 @@
                 burgerBtn.classList.toggle("burger-transform-active");
                 burgerBtn.setAttribute("aria-expanded", isOpen);
             });
+
+            // Smoothly collapse navigation drawer overlay if user clicks outside container path bounds
             document.addEventListener("click", (e) => {
                 if (!linksMenu.contains(e.target) && !burgerBtn.contains(e.target)) {
                     linksMenu.classList.remove("mobile-menu-active");
