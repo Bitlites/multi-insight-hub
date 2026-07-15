@@ -68,7 +68,7 @@
         margin-top: 40px !important;
     }
 
-    /* Fixed Nav Bar - Uses PaperMod's native var(--theme) directly so backgrounds change color dynamically */
+    /* Fixed Nav Bar - Bound straight to native var(--theme) so background switches automatically */
     .header {
         position: fixed !important;
         top: 0;
@@ -82,6 +82,7 @@
         display: flex;
         align-items: center;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        transition: background 0.3s ease, border-color 0.3s ease;
     }
 
     .nav {
@@ -114,7 +115,7 @@
     .logo-text {
         font-size: 1.4rem !important;
         font-weight: 700 !important;
-        letter-spacing: -.5px !important;
+        letter-spacing: -0.5px !important;
         color: var(--primary) !important;
     }
 
@@ -133,23 +134,23 @@
         line-height: 1 !important;
     }
 
+    /* FIX: Corrected Icon Visibility Engine Maps to PaperMod Class Guidelines Natively */
+    #theme-toggle svg {
+        display: none !important;
+    }
+
     body.dark #theme-toggle #sun {
         display: block !important;
     }
 
-    body.dark #theme-toggle #moon {
-        display: none !important;
-    }
-
-    body:not(.dark) #theme-toggle #sun {
-        display: none !important;
-    }
-
+    /* Dark theme -> Show Sun to switch back */
     body:not(.dark) #theme-toggle #moon {
         display: block !important;
     }
 
-    @media (min-width:1151px) {
+    /* Light theme -> Show Moon to switch back */
+
+    @media (min-width: 1151px) {
         #menu {
             display: flex !important;
             align-items: center !important;
@@ -160,13 +161,13 @@
         }
 
         #menu a {
-            font-size: .95rem !important;
+            font-size: 0.95rem !important;
             font-weight: 600 !important;
             padding: 8px 14px !important;
             border-radius: 6px !important;
             color: var(--primary) !important;
             text-decoration: none !important;
-            transition: all .2s ease !important;
+            transition: all 0.2s ease !important;
         }
 
         #menu a:hover {
@@ -272,25 +273,36 @@
 </style>
 
 <script>
+    // System Theme Initialization (Runs immediately to prevent theme flashing/flickering)
+    (function() {
+        const savedTheme = localStorage.getItem("pref-theme");
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        
+        if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+            document.documentElement.classList.add('dark');
+            document.body.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            document.body.classList.remove('dark');
+        }
+    })();
+
     document.addEventListener("DOMContentLoaded", () => {
-        // 1. Synchronize Dark/Light Mode Actions and Variable States Natively
-        const toggleBtn = document.getElementById("theme-toggle");
-        if (toggleBtn) {
-            toggleBtn.addEventListener("click", () => {
-                if (document.body.classList.contains("dark")) {
-                    document.body.classList.remove("dark");
-                    localStorage.setItem("pref-theme", "light");
-                } else {
-                    document.body.classList.add("dark");
-                    localStorage.setItem("pref-theme", "dark");
-                }
+        // Theme Toggle Controller
+        const themeToggle = document.getElementById("theme-toggle");
+        if (themeToggle) {
+            themeToggle.addEventListener("click", () => {
+                const isDark = document.documentElement.classList.toggle("dark");
+                document.body.classList.toggle("dark", isDark);
+                
+                localStorage.setItem("pref-theme", isDark ? 'dark' : 'light');
             });
         }
 
-        // 2. Hamburger Dropdown Navigation Interface State Logic Controller
+        // Mobile Responsive Drawer Controller Actions
         const burgerBtn = document.getElementById("hamburger-menu-toggle");
         const linksMenu = document.getElementById("menu");
-
+        
         if (burgerBtn && linksMenu) {
             burgerBtn.addEventListener("click", (e) => {
                 e.stopPropagation();
@@ -299,7 +311,7 @@
                 burgerBtn.setAttribute("aria-expanded", isOpen);
             });
 
-            // Smoothly collapse navigation drawer overlay if user clicks outside container path bounds
+            // Smoothly collapse navigation drawer overlay if user clicks outside
             document.addEventListener("click", (e) => {
                 if (!linksMenu.contains(e.target) && !burgerBtn.contains(e.target)) {
                     linksMenu.classList.remove("mobile-menu-active");
